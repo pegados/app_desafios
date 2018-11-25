@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".activity.LoginActivity">
+
+
+    <EditText
+        android:id="@+id/email_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="E-mail"
+        android:ems="10"
+        style="@style/Base.Widget.AppCompat.EditText"
+        />
+
+    <EditText
+        android:id="@+id/senha_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="Senha"
+        android:ems="10"
+        style="@style/Base.Widget.AppCompat.EditText"
+        />
+
+    <Button
+        android:id="@+id/entrar_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="ENTRAR"
+        android:onClick="entrar"
+        style=""
+        />
+
+    <Button
+        android:id="@+id/cadastrar_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="CADASTRAR"
+        android:onClick="cadastrar"
+        style=""
+        />
+
+
+
+
+</LinearLayout>
