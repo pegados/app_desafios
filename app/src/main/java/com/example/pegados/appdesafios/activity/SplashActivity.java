@@ -1,11 +1,11 @@
-package com.example.pegados.appdesafios;
+package com.example.pegados.appdesafios.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.pegados.appdesafios.activity.LoginActivity;
+import com.example.pegados.appdesafios.R;
 
 public class SplashActivity extends AppCompatActivity {
 

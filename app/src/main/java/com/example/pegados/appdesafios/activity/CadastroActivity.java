@@ -16,7 +16,8 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText edtNome;
     private EditText edtCpf;
     private EditText edtEmail;
-    private Usuario usuario;
+    private EditText edtSenha;
+    //private Usuario usuario;
 
     private UsuarioDAO usuarioDAO;
 
@@ -28,6 +29,7 @@ public class CadastroActivity extends AppCompatActivity {
         edtNome = findViewById(R.id.editNome);
         edtCpf = findViewById(R.id.editCpf);
         edtEmail = findViewById(R.id.editEmail);
+        edtSenha = findViewById(R.id.editSenha);
 
 
         usuarioDAO = usuarioDAO.getInstance(this);
@@ -38,13 +40,14 @@ public class CadastroActivity extends AppCompatActivity {
             String cpf = edtCpf.getText().toString();
             String nome = edtNome.getText().toString();
             String email = edtEmail.getText().toString();
+            String senha = edtSenha.getText().toString();
 
             String msg;
 
 
             // verificar se o usuário já existe no banco.
 
-            Usuario usuario = new Usuario(cpf, nome, email);
+            Usuario usuario = new Usuario(cpf, nome, email, senha);
             usuarioDAO.save(usuario);
             msg = "Usuario gravado com ID = " + usuario.getId();
 

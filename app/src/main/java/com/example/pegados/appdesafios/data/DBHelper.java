@@ -12,12 +12,13 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String SQL_DROP = "DROP TABLE IF EXISTS usuario";
 	private static final String SQL_CREATE = String.format(
 	        "CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, "+
-            "%s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL)",
+            "%s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL)",
             "usuario",
             "id",
             "cpf",
             "nome",
-			"email"
+			"email",
+            "senha"
             
     );
 

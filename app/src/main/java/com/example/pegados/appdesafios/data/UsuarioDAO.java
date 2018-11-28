@@ -4,9 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.pegados.appdesafios.activity.LoginActivity;
 
 public class UsuarioDAO {
 
@@ -15,7 +15,7 @@ public class UsuarioDAO {
     private static UsuarioDAO instance;
     private SQLiteDatabase db;
 
-    private String[] colunas = {"id", "cpf", "nome", "email"};
+    private String[] colunas = {"id", "cpf", "nome", "email", "senha"};
 
     public static UsuarioDAO getInstance(Context context){
         if (instance == null){
@@ -35,9 +35,30 @@ public class UsuarioDAO {
         values.put("cpf", usuario.getCpf());
         values.put("nome", usuario.getNome());
         values.put("email", usuario.getEmail());
+        values.put("senha", usuario.getSenha());
 
         long id = db.insert("usuario", null, values);
         usuario.setId((int)id);
+    }
+
+
+    public  boolean loginOK(String email, String senha){
+        String[] columns = {"email", "senha"};
+        try(Cursor c = db.query("usuario", columns, null, null, null, null, "email")){
+            if (c.moveToFirst()){
+                do {
+                    if (email.equals(c.getString(c.getColumnIndex("email"))) &&
+                            senha.equals(c.getString(c.getColumnIndex("senha")))){
+                            return true;
+                    }
+
+                }while ( (c.moveToNext()));
+            }
+        }
+
+        return false;
+
+
     }
 
 

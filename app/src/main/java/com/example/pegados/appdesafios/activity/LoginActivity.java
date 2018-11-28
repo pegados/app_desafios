@@ -8,12 +8,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pegados.appdesafios.R;
-import com.example.pegados.appdesafios.activity.CadastroActivity;
+import com.example.pegados.appdesafios.data.UsuarioDAO;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText edtEmail;
     private EditText edtSenha;
+
+    private UsuarioDAO usuarioDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
 
         edtEmail = findViewById(R.id.email_login);
         edtSenha = findViewById(R.id.senha_login);
+
+        usuarioDAO = UsuarioDAO.getInstance(this);
 
     }
 
@@ -39,8 +43,13 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        if (email.equals("admin@email.com") && senha.equals("admin")){
+        if (usuarioDAO.loginOK(edtEmail.getText().toString(), edtSenha.getText().toString())){
             Toast.makeText(this, "Logou", Toast.LENGTH_SHORT).show();
+
+            // Aqui o usuário autenticado irá ter acesso a lista de Desafios. ListDesafios
+
+
+
         }else{
             Toast.makeText(this, "Email ou senha errado(s)",Toast.LENGTH_SHORT).show();
         }

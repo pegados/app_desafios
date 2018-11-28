@@ -6,19 +6,22 @@ public class Usuario {
     private String cpf;
     private String nome;
     private String email;
+    private String senha;
 
 
-    public Usuario(int id, String cpf, String nome, String email) {
+    public Usuario(int id, String cpf, String nome, String email, String senha) {
         this.id = id;
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
+        this.senha = senha;
     }
 
-    public Usuario(String cpf, String nome, String email) {
+    public Usuario(String cpf, String nome, String email, String senha) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
+        this.senha = senha;
     }
 
     public int getId() {
@@ -51,5 +54,13 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
