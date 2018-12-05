@@ -62,4 +62,52 @@ public class UsuarioDAO {
     }
 
 
+    // método que retorna a tupla do atual cursor
+    private static Usuario fromCursor(Cursor c){
+        int id = c.getInt(c.getColumnIndex("id"));
+        String nome = c.getString(c.getColumnIndex("cpf"));
+        String cpf = c.getString(c.getColumnIndex("nome"));
+        String email = c.getString(c.getColumnIndex("email"));
+        String senha = c.getString(c.getColumnIndex("senha"));
+
+        return new Usuario(id, nome, cpf, email, senha);
+    }
+
+
+    public String VerificaCpf(Usuario usuario){
+        String[] columns = {"id", "cpf"};
+        try(Cursor c = db.query("usuario", columns, null, null, null, null, null)){
+            if (c.moveToFirst()){
+                do {
+                    if (usuario.getCpf().equals(c.getString(c.getColumnIndex("cpf")))){
+                        usuario.setId(c.getInt(c.getColumnIndex("id")));
+                        update(usuario);
+                        return usuario.getNome()+", o cpf já existia e os dados foram atualizados, ID "+usuario.getId();
+                    }
+
+                }while ( (c.moveToNext()));
+            }
+        }
+
+        save(usuario);
+        return usuario.getNome()+", foi inserido com sucesso com o ID "+usuario.getId();
+    }
+
+    public void update (Usuario usuario){
+        ContentValues values = new ContentValues();
+        values.put("cpf", usuario.getCpf());
+        values.put("nome", usuario.getNome());
+        values.put("email", usuario.getEmail());
+        values.put("senha", usuario.getSenha());
+        db.update(
+                "usuario",
+                values,
+                "cpf" + "=?",
+                new String[]{String.valueOf(usuario.getCpf())}
+        );
+    }
+
+
+
+
 }

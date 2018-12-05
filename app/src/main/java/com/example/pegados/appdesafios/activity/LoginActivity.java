@@ -1,6 +1,7 @@
 package com.example.pegados.appdesafios.activity;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
         usuarioDAO = UsuarioDAO.getInstance(this);
 
+
     }
 
 
@@ -39,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         if (senha.equals("")){
-            edtEmail.setError("Este campo precisa ser preenchido");
+            edtSenha.setError("Este campo precisa ser preenchido");
             return;
         }
 
@@ -47,11 +49,11 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Logou", Toast.LENGTH_SHORT).show();
 
             // Aqui o usuário autenticado irá ter acesso a lista de Desafios. ListDesafios
-
+            // Pegar o id do Usuário
 
 
         }else{
-            Toast.makeText(this, "Email ou senha errado(s)",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Email ou senha errado(s)",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -61,6 +63,19 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CadastroActivity.class);
         startActivityForResult(intent, 1);
 
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1){
+            Toast.makeText(this, data.getStringExtra("msg"), Toast.LENGTH_SHORT).show();
+            edtEmail.setText(data.getStringExtra("email"));
+            edtSenha.setText(data.getStringExtra("senha"));
+        }
 
     }
 }
