@@ -1,4 +1,4 @@
-package com.example.pegados.exemploservicebind;
+package com.example.pegados.appdesafios.service;
 
 import android.os.SystemClock;
 import android.util.Log;
@@ -14,7 +14,6 @@ public class TimeWorker implements Runnable {
         while (running){
             //seconds++;
             incrementSeconds();
-            Log.i("MyApp", "Segundos = "+seconds);
             SystemClock.sleep(1000);
         }
     }

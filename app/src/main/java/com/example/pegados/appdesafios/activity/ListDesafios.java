@@ -15,7 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 
 import com.example.pegados.appdesafios.R;
 import com.example.pegados.appdesafios.adapter.DesafiosAdapter;
@@ -25,7 +28,7 @@ import com.example.pegados.appdesafios.data.DesafioDAO;
 import java.io.Serializable;
 import java.util.List;
 
-public class ListDesafios extends ListActivity implements AppCompatCallback{
+public class ListDesafios extends ListActivity implements AppCompatCallback, AdapterView.OnItemLongClickListener {
 
     private AppCompatDelegate delegate;
 
@@ -42,7 +45,7 @@ public class ListDesafios extends ListActivity implements AppCompatCallback{
         delegate.onCreate(savedInstanceState);
         delegate.setContentView(R.layout.activity_list_desafios);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // Para o layout preencher toda tela do cel (remover a barra de tit.)
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // Para o layout preencher toda tela do cel (remover a barra de tit.)
         delegate.getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
 
         //delegate.getSupportActionBar().addOnMenuVisibilityListener((ActionBar.OnMenuVisibilityListener) this);
@@ -54,7 +57,7 @@ public class ListDesafios extends ListActivity implements AppCompatCallback{
         setListAdapter(adapter);
 
 
-        //getListView().setOnItemLongClickListener(this);
+        getListView().setOnItemLongClickListener(this);
 
         desafioDAO = DesafioDAO.getInstance(this);
 
@@ -77,6 +80,7 @@ public class ListDesafios extends ListActivity implements AppCompatCallback{
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.add_desafio){
             Intent intent = new Intent(getApplicationContext(), EditDesafio.class);
+            intent.putExtra("idUsuario", getIntent().getIntExtra("id", -1));
             startActivityForResult(intent, 100);
             return true;
         }
@@ -87,18 +91,28 @@ public class ListDesafios extends ListActivity implements AppCompatCallback{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 100){
+        if (requestCode == 100 && resultCode == 100){
             updateList();
+        }
+        if (requestCode == 200 & resultCode == 200){
+            // TO DO
         }
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
+        Intent intent = new Intent(getApplicationContext(), DesafioActivity.class);
 
-        Intent intent = new Intent(getApplicationContext(), EditDesafio.class);
+        intent.putExtra("desafio", adapter.getItem(position));
 
-        intent.putExtra("desafio", (Serializable) adapter.getItem(position));
-        startActivityForResult(intent, 100);
+
+        if (getIntent().getIntExtra("id", -1) == adapter.getItem(position).getIdUsuario()){
+            Toast.makeText(this, "Você não pode responder a este desafio", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Usuário inicia a resposta do Desafio
+        startActivityForResult(intent, 200);
+
     }
 
     @Override
@@ -115,5 +129,14 @@ public class ListDesafios extends ListActivity implements AppCompatCallback{
     @Override
     public ActionMode onWindowStartingSupportActionMode(ActionMode.Callback callback) {
         return null;
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        Desafio desafio = adapter.getItem(position);
+
+        Toast.makeText(this, desafio.getTitulo(), Toast.LENGTH_SHORT).show();
+
+        return true;
     }
 }

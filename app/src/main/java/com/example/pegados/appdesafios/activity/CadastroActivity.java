@@ -100,7 +100,14 @@ public class CadastroActivity extends AppCompatActivity {
             data.putExtra("senha", usuario.getSenha());
             data.putExtra("id", usuario.getId());
             data.putExtra("msg", msg);
-            setResult(RESULT_OK, data);
+            setResult(1, data);
             finish();
         }
+
+    @Override
+    public void onBackPressed() {
+
+        setResult(RESULT_CANCELED);
+        finish();
+    }
 }

@@ -1,6 +1,5 @@
-package com.example.pegados.exemploservicebind;
+package com.example.pegados.appdesafios.service;
 
-import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;

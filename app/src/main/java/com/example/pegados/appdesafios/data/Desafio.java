@@ -1,6 +1,8 @@
 package com.example.pegados.appdesafios.data;
 
-public class Desafio {
+import java.io.Serializable;
+
+public class Desafio implements Serializable {
 
     private int id;
     private int idUsuario;

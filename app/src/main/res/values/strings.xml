@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">AppDesafios</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_cadastro">Cadastro de Usuário</string>
+    <string name="title_activity_list_desafios">Lista de Desafios</string>
+
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

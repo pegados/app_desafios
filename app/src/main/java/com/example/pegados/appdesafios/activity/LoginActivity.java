@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 1){
+        if (requestCode == 1 && resultCode == 1){
             Toast.makeText(this, data.getStringExtra("msg"), Toast.LENGTH_SHORT).show();
             edtEmail.setText(data.getStringExtra("email"));
             edtSenha.setText(data.getStringExtra("senha"));

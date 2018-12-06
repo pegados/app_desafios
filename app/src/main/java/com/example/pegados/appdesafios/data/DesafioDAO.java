@@ -68,7 +68,6 @@ public class DesafioDAO {
 
     }
 
-
     private static Desafio fromCursor(Cursor c){
         int id = c.getInt(c.getColumnIndex("id"));
         int idUsuario = c.getInt(c.getColumnIndex("idUsuario"));

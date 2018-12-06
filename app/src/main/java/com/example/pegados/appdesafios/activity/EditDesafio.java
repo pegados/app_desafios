@@ -37,12 +37,20 @@ public class EditDesafio extends AppCompatActivity{
     }
 
     public void cadastrarDesafio(View view) {
+        double valorTentativa = 0;
+        double valorPremio = 0;
 
         String titulo = edt_titulo.getText().toString();
         String questao = edt_questao.getText().toString();
         String resposta = edt_resposta.getText().toString();
-        Double valorTentativa = Double.parseDouble(edt_valorTentativa.getText().toString());
-        Double valorPremio = Double.parseDouble(edt_valorPremio.getText().toString());
+
+        if (!edt_valorTentativa.getText().toString().equals("")){
+            valorTentativa = Double.parseDouble(edt_valorTentativa.getText().toString());
+
+        } if (!edt_valorPremio.getText().toString().equals("")){
+            valorPremio = Double.parseDouble(edt_valorPremio.getText().toString());
+        }
+
 
         if (titulo.equals("")){
             edt_titulo.setError("Este campo precisa ser preenchido");
@@ -56,11 +64,11 @@ public class EditDesafio extends AppCompatActivity{
             edt_resposta.setError("Este campo precisa ser preenchido");
         }
 
-        if (valorTentativa == null){
-            valorTentativa = 0.0;
+        if (valorTentativa < 0){
+            valorTentativa = 0;
         }
-        if (valorPremio == null){
-            valorPremio = 0.0;
+        if (valorPremio < 0){
+            valorPremio = 0;
         }
 
 
@@ -68,7 +76,7 @@ public class EditDesafio extends AppCompatActivity{
 
         if (getIntent() != null){
 
-            idUsuario = getIntent().getIntExtra("id", 0);
+            idUsuario = getIntent().getIntExtra("idUsuario", 0);
         }
 
 
@@ -79,7 +87,12 @@ public class EditDesafio extends AppCompatActivity{
         String msg = "Desafio cadastrado com o ID "+ desafio.getId() +" e ID do usuário "+desafio.getIdUsuario();
                 Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
-        setResult(RESULT_OK);
+        setResult(100);
+        finish();
+    }
+
+    public void cancelar(View view){
+        setResult(RESULT_CANCELED);
         finish();
     }
 }

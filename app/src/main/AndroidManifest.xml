@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.DesafioActivity" />
+        <activity android:name=".activity.DesafioActivity"
+            android:label="Responda ao Desafio"/>
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,10 +26,16 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".activity.CadastroActivity" />
+        <activity android:name=".activity.CadastroActivity"
+            android:label="@string/title_activity_cadastro"/>
         <activity android:name=".activity.EditDesafio" />
-        <activity android:name=".activity.EditDesafio" />
-        <activity android:name=".activity.ListDesafios"></activity>
+        <activity android:name=".activity.ListDesafios"
+            android:label="@string/title_activity_list_desafios"></activity>
+        <service
+            android:name=".service.TimeService"
+            android:enabled="true"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>
