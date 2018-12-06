@@ -1,9 +1,11 @@
 package com.example.pegados.appdesafios.activity;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,11 +19,15 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtSenha;
 
     private UsuarioDAO usuarioDAO;
+    private int idUsuario = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //Toolbar toolbar = findViewById(R.id.my_toolbar);
+        //setSupportActionBar(toolbar);
 
         edtEmail = findViewById(R.id.email_login);
         edtSenha = findViewById(R.id.senha_login);
@@ -45,12 +51,15 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        if (usuarioDAO.loginOK(edtEmail.getText().toString(), edtSenha.getText().toString())){
+        if (usuarioDAO.loginOK(edtEmail.getText().toString(), edtSenha.getText().toString()) > 0){
             Toast.makeText(this, "Logou", Toast.LENGTH_SHORT).show();
-
+            idUsuario = usuarioDAO.loginOK(edtEmail.getText().toString(), edtSenha.getText().toString());
             // Aqui o usuário autenticado irá ter acesso a lista de Desafios. ListDesafios
             // Pegar o id do Usuário
 
+            Intent intent = new Intent(this, ListDesafios.class);
+            intent.putExtra("id", idUsuario);
+            startActivityForResult(intent, 2);
 
         }else{
             Toast.makeText(this, "Email ou senha errado(s)",Toast.LENGTH_LONG).show();
@@ -64,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
 
 
-
     }
 
     @Override
@@ -75,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, data.getStringExtra("msg"), Toast.LENGTH_SHORT).show();
             edtEmail.setText(data.getStringExtra("email"));
             edtSenha.setText(data.getStringExtra("senha"));
+            idUsuario = data.getIntExtra("id", 0);
         }
 
     }

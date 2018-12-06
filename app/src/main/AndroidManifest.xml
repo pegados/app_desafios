@@ -25,7 +25,10 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".activity.CadastroActivity"></activity>
+        <activity android:name=".activity.CadastroActivity" />
+        <activity android:name=".activity.EditDesafio" />
+        <activity android:name=".activity.EditDesafio" />
+        <activity android:name=".activity.ListDesafios"></activity>
     </application>
 
 </manifest>

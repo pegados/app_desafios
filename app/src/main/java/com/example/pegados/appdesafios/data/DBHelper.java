@@ -22,6 +22,23 @@ public class DBHelper extends SQLiteOpenHelper {
             
     );
 
+	private static final String SQL_DROP01 = "DROP TABLE IF EXISTS desafio";
+	private static final String SQL_CREATE02 = String.format(
+			"CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, "+
+					"%s INTEGER NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL," +
+					"%s REAL NOT NULL, %s REAL NOT NULL," +
+					" FOREIGN KEY (idUsuario) REFERENCES usuario (id))",
+			"desafio",
+			"id",
+			"idUsuario",
+			"titulo",
+			"questao",
+			"resposta",
+			"valorTentativa",
+			"valorPremio"
+
+	);
+
 	private static DBHelper instance;
 
 	public static DBHelper getInstance(Context context){
@@ -38,8 +55,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_DROP);
+        // criando a tabela usuario
+	    db.execSQL(SQL_DROP);
         db.execSQL(SQL_CREATE);
+
+        // criando a tabela desafio
+        db.execSQL(SQL_DROP01);
+        db.execSQL(SQL_CREATE02);
 
 
 	}

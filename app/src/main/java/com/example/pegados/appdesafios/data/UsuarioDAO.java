@@ -4,9 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
-
-import com.example.pegados.appdesafios.activity.LoginActivity;
 
 public class UsuarioDAO {
 
@@ -42,22 +39,21 @@ public class UsuarioDAO {
     }
 
 
-    public  boolean loginOK(String email, String senha){
-        String[] columns = {"email", "senha"};
+    public int loginOK(String email, String senha){
+        String[] columns = {"id", "email", "senha"};
         try(Cursor c = db.query("usuario", columns, null, null, null, null, "email")){
             if (c.moveToFirst()){
                 do {
                     if (email.equals(c.getString(c.getColumnIndex("email"))) &&
                             senha.equals(c.getString(c.getColumnIndex("senha")))){
-                            return true;
+                            return c.getInt(c.getColumnIndex("id"));
                     }
 
                 }while ( (c.moveToNext()));
             }
         }
 
-        return false;
-
+        return 0;
 
     }
 
@@ -106,8 +102,6 @@ public class UsuarioDAO {
                 new String[]{String.valueOf(usuario.getCpf())}
         );
     }
-
-
 
 
 }

@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.pegados.appdesafios.R;
 import com.example.pegados.appdesafios.data.Usuario;
@@ -99,6 +98,7 @@ public class CadastroActivity extends AppCompatActivity {
             Intent data = new Intent();
             data.putExtra("email", usuario.getEmail());
             data.putExtra("senha", usuario.getSenha());
+            data.putExtra("id", usuario.getId());
             data.putExtra("msg", msg);
             setResult(RESULT_OK, data);
             finish();
